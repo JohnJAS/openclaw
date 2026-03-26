@@ -1,93 +1,213 @@
 ---
 name: mini-agent
-description: 委托编码任务给 Mini-Agent。适用于：构建新功能、代码重构、文件操作、执行 shell 命令等。需要 Mini-Agent 服务器运行在 ws://localhost:8765。使用场景：用户明确要求使用 mini-agent，或需要执行复杂编码任务时。
+description: 创意工厂 - 将你的想法变为现实。Mini-Agent 是一个智能创意实现引擎，能够理解你的创意描述并自动生成代码、文件、脚本等实现成果。适用于：应用开发、原型验证、自动化脚本、创意原型、工具构建等场景。使用前确保 Mini-Agent 服务器已启动 (mini-agent-server)。
 metadata:
   {
     "openclaw": {
-      "emoji": "🤖",
+      "emoji": "🎨",
       "requires": { "bins": ["mini-agent-exec"] }
     }
   }
 ---
 
-# Mini-Agent Skill
+# Mini-Agent 创意工厂 🏭
 
-委托编码任务给 Mini-Agent 执行。Mini-Agent 是一个具备文件操作、Bash 执行、MCP 工具和 Skills 能力的智能代理。
+> 把你的创意交给 AI，让它变成现实。
 
-## 前提条件
+Mini-Agent 是你的创意实现引擎。你只需要描述想要什么，它会自动处理所有实现细节——设计、编码、文件创建、测试，一切都在一次对话中完成。
 
-Mini-Agent WebSocket 服务器必须正在运行：
+## 快速开始
+
+### 启动服务器并执行
 
 ```bash
+# 确保服务器已启动
 mini-agent-server
+
+# 实现你的创意
+mini-agent-exec "你的创意描述"
 ```
 
-默认监听 `ws://localhost:8765`。
+## 创意类型
 
-## 使用方式
+### 🖥️ 应用开发
 
 ```bash
-# 基本用法 - 执行单个任务
-mini-agent-exec "Your task description here"
+# Web 应用
+mini-agent-exec "创建一个待办事项 Web 应用，支持添加、删除、标记完成，数据保存到本地存储"
 
-# 指定工作目录
-mini-agent-exec --workspace /path/to/project "Your task"
+# API 服务
+mini-agent-exec "构建一个 REST API，包含用户注册、登录、JWT 认证，使用 FastAPI 和 SQLite"
 
-# 流式输出（实时显示进度）
-mini-agent-exec --stream "Write a Python script"
-
-# 详细模式（显示思考和工具调用）
-mini-agent-exec --verbose "Refactor the codebase"
+# CLI 工具
+mini-agent-exec "开发一个命令行工具，可以批量重命名文件，支持正则匹配和预览"
 ```
 
-## 参数说明
+### 🎨 创意原型
 
-| 参数 | 说明 |
+```bash
+# 游戏原型
+mini-agent-exec "用 Pygame 做一个简单的贪吃蛇游戏，有分数和游戏结束界面"
+
+# 可视化
+mini-agent-exec "创建一个数据可视化仪表盘，展示实时 CPU 和内存使用情况"
+
+# 交互演示
+mini-agent-exec "做一个交互式数学函数绘图器，用户可以输入函数表达式"
+```
+
+### ⚙️ 自动化脚本
+
+```bash
+# 文件处理
+mini-agent-exec "写一个脚本，扫描目录下所有图片，按拍摄日期整理到子文件夹"
+
+# 数据处理
+mini-agent-exec "创建一个 CSV 数据清洗脚本，处理缺失值、去重、格式标准化"
+
+# 网络爬虫
+mini-agent-exec "开发一个爬虫，抓取指定网站的新闻标题和摘要，保存为 JSON"
+```
+
+### 🛠️ 工具构建
+
+```bash
+# 开发工具
+mini-agent-exec "创建一个代码生成器，根据数据库 schema 生成 CRUD 操作代码"
+
+# 分析工具
+mini-agent-exec "做一个代码复杂度分析工具，输出每个文件的圈复杂度报告"
+
+# 配置工具
+mini-agent-exec "创建一个项目初始化工具，支持选择框架、配置 ESLint/Prettier、生成基础结构"
+```
+
+## 高级用法
+
+### 指定工作目录
+
+```bash
+mini-agent-exec --workspace /path/to/your/project "你的创意"
+```
+
+### 流式查看进度
+
+```bash
+mini-agent-exec --stream "构建一个完整的博客系统"
+```
+
+### 详细模式（查看思考过程）
+
+```bash
+mini-agent-exec --verbose --stream "你的复杂创意"
+```
+
+### 超时设置
+
+```bash
+# 大型项目可能需要更长超时（默认 300 秒）
+mini-agent-exec --timeout 600 "创建一个微服务架构的项目"
+```
+
+## 创意描述技巧
+
+### ✅ 好的创意描述
+
+```
+✓ 明确的目标
+  "创建一个个人财务追踪应用，支持收入支出记录、分类统计、月度报告"
+
+✓ 具体的技术栈
+  "用 React + Tailwind CSS 构建一个图片画廊，支持拖拽排序和灯箱预览"
+
+✓ 清晰的功能点
+  "做一个番茄钟应用，包含 25 分钟工作时段、5 分钟休息、统计今日完成数量"
+```
+
+### ❌ 不好的创意描述
+
+```
+✗ 太模糊
+  "做一个好玩的东西" → Mini-Agent 不知道你想要什么
+
+✗ 范围太大
+  "创建一个完整的电商平台" → 一次对话难以完成，建议拆分
+
+✗ 缺少上下文
+  "帮我完善它" → 需要说明具体要完善什么
+```
+
+## 创意工厂能力
+
+Mini-Agent 创意工厂具备以下能力：
+
+| 能力 | 描述 |
 |------|------|
-| `--workspace, -w` | 工作目录路径 |
-| `--stream, -s` | 流式输出，实时显示进度 |
-| `--verbose, -v` | 详细模式，显示思考和工具调用 |
-| `--timeout, -t` | 超时时间（秒，默认 300） |
-| `--url` | WebSocket 服务器地址（默认 ws://localhost:8765） |
+| 🔨 **代码生成** | 生成高质量、可运行的代码 |
+| 📁 **文件操作** | 创建、读取、编辑文件和目录 |
+| 🖥️ **Shell 执行** | 运行命令、安装依赖、启动服务 |
+| 🔧 **MCP 工具** | 连接外部工具和服务 |
+| 📚 **Skills 扩展** | 加载专业技能模块 |
+| 💾 **会话记忆** | 多轮对话保持上下文 |
 
-## 典型使用场景
+## 最佳实践
 
-### 1. 文件操作
-
-```bash
-mini-agent-exec "Create a config.yaml file with database settings"
-mini-agent-exec --workspace ./myproject "Add a README.md with project documentation"
-```
-
-### 2. 代码重构
+### 1. 从小开始
 
 ```bash
-mini-agent-exec --workspace ./src "Refactor the auth module to use async/await"
-mini-agent-exec "Convert the JavaScript code to TypeScript"
+# 先做核心功能
+mini-agent-exec "创建一个最简单的待办列表，只有添加和显示功能"
+
+# 再迭代增强
+mini-agent-exec --workspace ./todo-app "给待办列表添加删除和编辑功能"
 ```
 
-### 3. Shell 命令执行
+### 2. 指定约束
 
 ```bash
-mini-agent-exec "List all Python files and count their lines"
-mini-agent-exec "Set up a new Python project with venv and requirements.txt"
+mini-agent-exec "创建一个 Flask API，要求：
+1. 使用 Blueprint 组织路由
+2. 所有响应使用 JSON 格式
+3. 包含错误处理
+4. 添加基本的日志记录"
 ```
 
-### 4. 复杂任务
+### 3. 提供示例
 
 ```bash
-mini-agent-exec --stream --verbose "Build a REST API for user management with FastAPI"
+mini-agent-exec "创建一个 CLI 工具，类似下面这样的用法：
+$ mytool process input.csv --output result.json
+处理 CSV 文件并输出统计结果"
 ```
 
-## 注意事项
+### 4. 分步实现
 
-1. **服务器必须运行**: 确保在另一个终端中启动了 `mini-agent-server`
-2. **工作目录**: 使用 `--workspace` 指定正确的工作目录
-3. **超时**: 长任务可能需要增加 `--timeout` 参数
-4. **错误处理**: 如果连接失败，检查服务器是否运行在正确的端口
+```bash
+# Step 1: 项目结构
+mini-agent-exec "初始化一个 Python 项目结构，包含 src、tests、docs 目录"
 
-## 与其他 Skills 的关系
+# Step 2: 核心模块
+mini-agent-exec --workspace ./project "在 src/ 目录实现核心数据处理模块"
 
-- 对于简单的文件编辑，优先使用内置的 edit/write 工具
-- 对于需要 Mini-Agent 特定能力（如 MCP 工具、特定 Skills）的任务，使用此 skill
-- 可以与 `coding-agent` skill 配合使用，根据任务特点选择合适的代理
+# Step 3: 测试
+mini-agent-exec --workspace ./project "为数据处理模块编写单元测试"
+```
+
+## 故障排除
+
+| 问题 | 解决方案 |
+|------|----------|
+| `Connection refused` | 确保已运行 `mini-agent-server` |
+| `Timeout` | 增加 `--timeout` 参数 |
+| 结果不符合预期 | 使用 `--verbose` 查看思考过程，优化描述 |
+| 权限问题 | 确保工作目录有读写权限 |
+
+## 开始创造
+
+现在就试试：
+
+```bash
+mini-agent-exec "创建一个随机名言生成器，每次运行显示一句励志名言"
+```
+
+让创意变成现实，只需要一句话。🏭✨
